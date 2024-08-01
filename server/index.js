@@ -11,7 +11,7 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/newdepartment", department);
+app.use("/api/department", department);
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

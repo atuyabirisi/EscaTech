@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { departmentModel } = require("../models/departmentModel");
+const { result } = require("lodash");
 
 router.post("/", async (req, res) => {
   try {
@@ -20,6 +21,15 @@ router.post("/", async (req, res) => {
 
     await department.save();
     res.status(200).send("Department has been successfully created");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const departments = await departmentModel.find();
+    res.status(200).send(departments);
   } catch (error) {
     console.log(error);
   }

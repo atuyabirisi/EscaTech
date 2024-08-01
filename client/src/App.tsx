@@ -1,4 +1,4 @@
-import DepartmentReg from "./components/DepartmentReg";
+// import DepartmentReg from "./components/DepartmentReg";
 import Navbar from "./components/Navbar";
 import InstructorReg from "./components/InstructorReg";
 
