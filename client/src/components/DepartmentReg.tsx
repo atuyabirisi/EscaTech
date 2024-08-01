@@ -11,7 +11,7 @@ export default function DepartmentReg() {
     const department = getValues();
 
     axios
-      .post("http://localhost:5000/api/newdepartment", { ...department })
+      .post("http://localhost:5000/api/department", { ...department })
       .then(() => {
         reset();
       })

@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import useDepartmentList from "../hooks/useDepartment";
 
 export default function InstructorReg() {
   const { register, handleSubmit } = useForm();
+  const { data } = useDepartmentList();
 
   return (
     <div className="row mx-1">
@@ -110,16 +112,11 @@ export default function InstructorReg() {
           </label>
           <select {...register("dep")} id="dep" className="form-control">
             <option value=""></option>
-            <option value="Information Systems & Computing">
-              Information Systems & Computing
-            </option>
-            <option value="Building & Civil Engineering">
-              Building & Civil Engineering
-            </option>
-            <option value="Mechanical Engineering">
-              Mechanical Engineering
-            </option>
-            <option value="Liberal Studies">Liberal Studies</option>
+            {data?.map((dep, index) => (
+              <option key={index} value={dep.name}>
+                {dep.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-3 d-flex justify-content-end">
