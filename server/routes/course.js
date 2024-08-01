@@ -24,4 +24,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const courses = await CourseModel.find();
+    res.status(200).send(courses);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
