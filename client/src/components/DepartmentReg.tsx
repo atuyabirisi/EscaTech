@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FormEvent } from "react";
+import useInstructorsList from "../hooks/useInstructorList";
 
 export default function DepartmentReg() {
-  const instructors = ["Atuya", "Dan", "Edwin", "Gregory", "Gratus", "Jayvon"];
   const { register, getValues, reset } = useForm();
+  const { data } = useInstructorsList();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -57,9 +58,10 @@ export default function DepartmentReg() {
             </label>
             <select {...register("hod")} id="hod" className="form-control">
               <option value=""></option>
-              {instructors.map((instructor, index) => (
-                <option value={instructor} key={index}>
-                  {instructor}
+              {data?.map((instructor, index) => (
+                <option value={instructor.name} key={index}>
+                  {instructor.name} {" - "}
+                  {instructor.dep}
                 </option>
               ))}
             </select>
