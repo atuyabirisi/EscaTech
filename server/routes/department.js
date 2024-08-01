@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { departmentModel } = require("../models/departmentModel");
-const { result } = require("lodash");
 
 router.post("/", async (req, res) => {
   try {
