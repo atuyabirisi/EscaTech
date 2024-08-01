@@ -1,8 +1,25 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { FormEvent } from "react";
 
 export default function DepartmentReg() {
   const instructors = ["Atuya", "Dan", "Edwin", "Gregory", "Gratus", "Jayvon"];
-  const { register, handleSubmit } = useForm();
+  const { register, getValues, reset } = useForm();
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const department = getValues();
+
+    axios
+      .post("http://localhost:5000/api/newdepartment", { ...department })
+      .then(() => {
+        reset();
+      })
+      .catch((error) => {
+        console.log(error);
+        reset();
+      });
+  };
 
   return (
     <div className="row mx-1">
@@ -11,37 +28,35 @@ export default function DepartmentReg() {
         <div className="d-flex justify-content-center py-3">
           <h5>Register Academic Department</h5>
         </div>
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="depid" className="form-label">
-              DEPARTMENT CODE
+            <label htmlFor="code" className="form-label">
+              Departmet Code
             </label>
             <input
-              {...register("depid")}
-              id="depid"
+              {...register("code")}
+              id="code"
               type="text"
               className="form-control"
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="depname" className="form-label">
-              DEPARTMENT NAME
+            <label htmlFor="name" className="form-label">
+              Department Name
             </label>
             <input
-              {...register("depname")}
-              id="depname"
+              {...register("name")}
+              id="name"
               type="text"
               className="form-control"
             />
           </div>
           <div className="mb-3 form-group">
             <label htmlFor="hod" className="form-label">
-              HOD
+              Head of Department
             </label>
             <select {...register("hod")} id="hod" className="form-control">
-              <option value="" disabled>
-                Select the Department Head
-              </option>
+              <option value=""></option>
               {instructors.map((instructor, index) => (
                 <option value={instructor} key={index}>
                   {instructor}
@@ -51,7 +66,7 @@ export default function DepartmentReg() {
           </div>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label">
-              PHONE
+              Phone
             </label>
             <input
               {...register("phone")}
@@ -62,7 +77,7 @@ export default function DepartmentReg() {
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
-              EMAIL
+              Email
             </label>
             <input
               {...register("email")}
