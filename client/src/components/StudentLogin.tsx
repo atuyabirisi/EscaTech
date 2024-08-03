@@ -15,9 +15,9 @@ export default function StudentLogin() {
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </div>
-        <div className="w-100 text-center py-3">
-          <h4>Welcome Back</h4>
-          <h4>Login</h4>
+        <div className="w-100 text-center py-2">
+          <h5>RTVC</h5>
+          <h5>Student Portal</h5>
         </div>
         <div className="w-75 p-4">
           <form>
@@ -59,6 +59,12 @@ export default function StudentLogin() {
               </button>
             </div>
           </form>
+        </div>
+        <div>
+          <p>
+            Powered By <span className="link-primary">Space ya Tech</span> @
+            2024
+          </p>
         </div>
       </div>
     </div>
