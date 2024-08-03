@@ -1,3 +1,4 @@
+import StudentLogin from "./components/StudentLogin";
 import Navbar from "./components/Navbar";
 import StudentReg from "./components/StudentReg";
 // import CoursesReg from "./components/CoursesReg";
@@ -7,8 +8,9 @@ import StudentReg from "./components/StudentReg";
 export default function App() {
   return (
     <div className="">
-      <Navbar />
-      <StudentReg />
+      <StudentLogin />
+      {/* <Navbar /> */}
+      {/* <StudentReg /> */}
       {/* <CoursesReg /> */}
       {/* <DepartmentReg /> */}
       {/* <InstructorReg /> */}
