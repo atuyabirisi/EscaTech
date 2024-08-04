@@ -1,17 +1,16 @@
-import StudentLogin from "./components/StudentLogin";
+// import StudentLogin from "./components/StudentLogin";
 // import Navbar from "./components/Navbar";
 // import StudentReg from "./components/StudentReg";
 // import CoursesReg from "./components/CoursesReg";
 // import DepartmentReg from "./components/DepartmentReg";
 // import InstructorReg from "./components/InstructorReg";
-
-// import LandingPage from "./components/LandingPage";
+import LandingPageLayout from "./components/landingpage/LandingPageLayout";
 
 export default function App() {
   return (
     <div className="">
-      {/* <LandingPage /> */}
-      <StudentLogin />
+      <LandingPageLayout />
+      {/* <StudentLogin /> */}
       {/* <Navbar /> */}
       {/* <StudentReg /> */}
       {/* <CoursesReg /> */}
