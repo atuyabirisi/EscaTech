@@ -15,16 +15,16 @@ export default function Navbar() {
         </h5>
       </div>
       <div className="d-flex align-items-center gap-2">
-        <div className="text-center">
-          <h6>
-            <i>
-              Atuya Birisi.H <br /> Dean Academics
-            </i>
-          </h6>
+        <div className="text-end">
+          <small>
+            Atuya Birisi Hamphrey
+            <br />
+            Student{" "}
+          </small>
         </div>
         <div style={{ width: "50px", height: "50px", borderRadius: "50%" }}>
           <img
-            src="src\assets\profile.png"
+            src="src\assets\passport.jpg"
             alt="profile-pic"
             style={{
               width: "100%",

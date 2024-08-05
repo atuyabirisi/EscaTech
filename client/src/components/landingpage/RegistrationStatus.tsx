@@ -1,6 +1,6 @@
 export default function RegistrationStatus() {
   return (
-    <div className="rounded bg-warning p-2 mt-3">
+    <div className="rounded bg-light p-2 mt-3">
       <div className="text-center py-3 ">
         <h6>REGISTRATION STATUS</h6>
       </div>

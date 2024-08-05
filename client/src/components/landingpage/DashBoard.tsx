@@ -1,3 +1,4 @@
+import GraphAnalytics from "./GraphAnalytics";
 import NoticeBoard from "./NoticeBoard";
 import RegistrationStatus from "./RegistrationStatus";
 import Sidepanel from "./Sidepanel";
@@ -12,9 +13,8 @@ export default function DashBoard() {
         <NoticeBoard />
         <RegistrationStatus />
       </div>
-      <div className="col-2 bg-warning">
-        <h5>CALENDAR</h5>
-        <h5>ANALYTICS</h5>
+      <div className="col-2">
+        <GraphAnalytics />
       </div>
     </div>
   );
