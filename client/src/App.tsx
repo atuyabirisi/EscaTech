@@ -1,21 +1,32 @@
-// import StudentLogin from "./components/StudentLogin";
-// import Navbar from "./components/Navbar";
-// import StudentReg from "./components/StudentReg";
-// import CoursesReg from "./components/CoursesReg";
-// import DepartmentReg from "./components/DepartmentReg";
-// import InstructorReg from "./components/InstructorReg";
-import LandingPageLayout from "./components/landingpage/LandingPageLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Login from "./components/auth/Login";
+import InvoicePdf from "./components/invoiceform/InvoicePdf";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import LandingPageLayout from "./components/landing/LandingPageLayout";
 
 export default function App() {
   return (
-    <div className="">
-      <LandingPageLayout />
-      {/* <StudentLogin /> */}
-      {/* <Navbar /> */}
-      {/* <StudentReg /> */}
-      {/* <CoursesReg /> */}
-      {/* <DepartmentReg /> */}
-      {/* <InstructorReg /> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <LandingPageLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/invoice/:id"
+          element={
+            <ProtectedRoute>
+              <InvoicePdf />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

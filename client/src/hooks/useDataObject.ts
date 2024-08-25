@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react';
 import apiClient from '../utilities/apiClient';
 
-const useData = <Type>(endpoint: string) => {
-    const [data, setData] = useState<Type[]>([]);
+const useDataObject = <Type>(endpoint: string) => {
+    const [data, setData] = useState<Type>();
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState<String>();
 
     useEffect(() => {
         
         setIsLoading(true);
         apiClient
-            .get<Type[]>(endpoint)
+            .get<Type>(endpoint)
             .then(res => {
                 setData(res.data);
                 setIsLoading(false);
@@ -24,5 +24,5 @@ const useData = <Type>(endpoint: string) => {
   return { data, isLoading, error }
 }
 
-export default useData;
+export default useDataObject;
 
