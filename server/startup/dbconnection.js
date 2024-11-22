@@ -1,6 +1,6 @@
-const mongoose = require("mongoose"),
-  logger = require("../logger/winstonLogger"),
-  dbConnectionString = process.env.DB_CONNECTION_STRING;
+const mongoose = require("mongoose");
+const logger = require("../logger/winstonLogger");
+const dbConnectionString = process.env.DB_CONNECTION_STRING;
 
 module.exports = () => {
   mongoose

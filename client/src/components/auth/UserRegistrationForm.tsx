@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
-import { useRegisterUser } from "../../hooks/useRegisterUser";
 import {
   RegistrationData,
   userRegSchema,
 } from "./schemas/userRegistrationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { createResource } from "../../hooks/useCreateResource";
 
 export default function UserRegistrationForm() {
   const [visible, setVisible] = useState(true);
-  const { registerUser, error } = useRegisterUser();
+  const { postRequest, error } = createResource();
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,9 +19,13 @@ export default function UserRegistrationForm() {
 
   const {
     register,
-    handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<RegistrationData>({ resolver: zodResolver(userRegSchema) });
+
+  const handleSubmit = () => {
+    postRequest("/register", getValues());
+  };
 
   return (
     <div style={{ overflowX: "hidden" }} className="vh-100 p-1">
@@ -30,12 +34,7 @@ export default function UserRegistrationForm() {
           {error}
         </div>
       )}
-      <form
-        autoComplete="false"
-        onSubmit={handleSubmit((data) => {
-          registerUser(data);
-        })}
-      >
+      <form autoComplete="false" onSubmit={handleSubmit}>
         <div className="row my-2">
           <div className="col-lg-4">
             <label htmlFor="email" className="form-label">

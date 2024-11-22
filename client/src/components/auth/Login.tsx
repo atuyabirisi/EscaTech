@@ -7,7 +7,7 @@ import { openForgotPassModal } from "../../slices/forgotPassSlice";
 
 export default function Login() {
   const [showPass, setShowPass] = useState(false);
-  const { register, getValues, reset } = useForm<LoginCredentials>();
+  const { register, getValues } = useForm<LoginCredentials>();
   const { login, error } = useLogin();
 
   const dispatch: AppDispatch = useDispatch();

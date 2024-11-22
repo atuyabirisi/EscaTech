@@ -4,7 +4,9 @@ const express = require("express"),
   requestOtp = require("../endpoints/requestOtp"),
   login = require("../endpoints/login"),
   verifyOtp = require("../endpoints/verifyOtp"),
-  error = require("../middleware/error");
+  error = require("../middleware/error"),
+  client = require("../endpoints/client"),
+  invoice = require("../endpoints/generateInvoice");
 
 module.exports = function (app) {
   app.use(cors());
@@ -13,6 +15,8 @@ module.exports = function (app) {
   app.use("/api/login", login);
   app.use("/api/request_otp", requestOtp);
   app.use("/api/verify_otp", verifyOtp);
+  app.use("/api/register_client", client);
+  app.use("/api/invoice", invoice);
 
   app.use(error);
 };
