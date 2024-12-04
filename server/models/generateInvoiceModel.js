@@ -11,6 +11,7 @@ const GenerateInvoiceModel = model(
   "invoice",
   new Schema(
     {
+      invoice_id: { type: String, required: true },
       status: { type: String, required: true, enum: ["open", "closed"] },
       opendate: { type: Date, required: true },
       duedate: { type: Date, required: true },

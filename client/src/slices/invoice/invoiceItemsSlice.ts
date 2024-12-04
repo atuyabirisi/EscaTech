@@ -27,7 +27,7 @@ const invoiceItemsCart = createSlice({
         setInvoiceItemsData: (state, { payload }) => {
             state.invoiceItemData = { ...state.invoiceItemData, ...payload };
             state.invoiceItemData.amount = (state.invoiceItemData.quantity * state.invoiceItemData.unitPrice);
-        },  
+        },   
         resetInvoiceItemsForm: (state) => {
             state.invoiceItemData = initialState.invoiceItemData;
         },
@@ -35,4 +35,4 @@ const invoiceItemsCart = createSlice({
 });
 
 export default invoiceItemsCart.reducer;
-export const { setInvoiceItemsData, resetInvoiceItemsForm } = invoiceItemsCart.actions;
+export const { setInvoiceItemsData,  resetInvoiceItemsForm } = invoiceItemsCart.actions;

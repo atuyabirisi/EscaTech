@@ -1,30 +1,33 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { FcAdvance, FcDownLeft } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { FormEvent } from "react";
 import { goBack, setStepNumber } from "../../slices/invoiceFormSteps";
 import { toggleCustomerRegModal } from "../../slices/customerRegSlice";
 import CustomerRegModal from "../modals/CustomerRegModal";
 import { useData } from "../../hooks/useData";
 import { setInvoiceFormData } from "../../slices/invoice/invoiceFormData";
-
-interface Client {
-  _id: string;
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-}
+import {
+  Client,
+  clientSchema,
+  InvoiceClient,
+} from "../../schemas/invoiceFormSchemas/invoiceClientSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function InvoiceClientDetails() {
-  const { register, getValues } = useForm(),
-    { data } = useData<Client>("/register_client"),
-    dispatch: AppDispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InvoiceClient>({
+    resolver: zodResolver(clientSchema),
+  });
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    dispatch(setInvoiceFormData(getValues()));
+  const { data } = useData<Client>("/register_client");
+
+  const onSubmit = (data: FieldValues) => {
+    dispatch(setInvoiceFormData(data));
     dispatch(setStepNumber(3));
   };
 
@@ -40,7 +43,7 @@ export default function InvoiceClientDetails() {
           </h6>
         </div>
         <div className="card-body">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-2">
               <label htmlFor="client">Select Client</label>
               <select
@@ -48,6 +51,7 @@ export default function InvoiceClientDetails() {
                 className="form-control"
                 id="client"
               >
+                <option value=""></option>
                 {data.map(({ name, address, _id }, index) => (
                   <option
                     key={index}
@@ -55,6 +59,9 @@ export default function InvoiceClientDetails() {
                   >{`${name} ${address}`}</option>
                 ))}
               </select>
+              {errors.client && (
+                <p className="text-danger">{errors.client.message}</p>
+              )}
             </div>
             <div className="mb-3 d-flex justify-content-end">
               <a

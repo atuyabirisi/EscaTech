@@ -12,6 +12,11 @@ import { setInvoiceProdutsData } from "../../slices/invoice/invoiceFormData";
 
 export default function InvoiceItems() {
   const dispatch: AppDispatch = useDispatch();
+
+  const goOneStepBack = () => dispatch(goBack());
+
+  const advance = () => dispatch(setStepNumber(4));
+
   const { invoiceItemData } = useSelector(
     (state: RootState) => state.invoiceItemsData
   );
@@ -27,9 +32,6 @@ export default function InvoiceItems() {
     dispatch(setInvoiceProdutsData(invoiceItemData));
     dispatch(resetInvoiceItemsForm());
   };
-
-  const goOneStepBack = () => dispatch(goBack());
-  const advance = () => dispatch(setStepNumber(4));
 
   return (
     <form onSubmit={addItemToInvoice}>

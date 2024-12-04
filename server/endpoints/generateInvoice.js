@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const GenerateInvoiceModel = require("../models/generateInvoiceModel");
 const asyncMiddleware = require("../middleware/asyncMiddleware");
+const generateInvoiceId = require("../utilities/generateInvoiceId");
 
 router.post(
   "/",
@@ -17,7 +18,10 @@ router.post(
       grandTotal,
     } = req.body;
 
+    const invoice_id = await generateInvoiceId();
+
     const newInvoice = new GenerateInvoiceModel({
+      invoice_id: invoice_id,
       status: status,
       opendate: opendate,
       duedate: duedate,
@@ -48,6 +52,7 @@ router.get(
   asyncMiddleware(async (req, res) => {
     const { id } = req.params;
     const invoice = await GenerateInvoiceModel.findById(id).populate("client");
+    console.log(invoice);
     res.send(invoice);
   })
 );

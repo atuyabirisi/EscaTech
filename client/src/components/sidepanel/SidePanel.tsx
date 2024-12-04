@@ -17,10 +17,10 @@ export default function SidePanel() {
   );
 
   return (
-    <div className="card border-0 bg-light vh-99" style={{ minHeight: "100%" }}>
+    <div className="card border-0 rounded-0 bg-light">
       <ul style={{ listStyle: "none" }}>
         <div className="card-body">
-          <li className="p-2">
+          <li className="p-3">
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"
@@ -30,7 +30,7 @@ export default function SidePanel() {
               <small>Dashboard</small>
             </a>
           </li>
-          <li className="p-2">
+          <li className="p-3">
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"
@@ -41,7 +41,7 @@ export default function SidePanel() {
             </a>
             {toggleInvoiceMenuItem && <InvoiceSubmenuItem />}
           </li>
-          <li className="p-2">
+          <li className="p-3">
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"
@@ -50,7 +50,7 @@ export default function SidePanel() {
               <small>Manage clients</small>
             </a>
           </li>
-          <li className="p-2">
+          <li className="p-3">
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"

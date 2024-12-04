@@ -1,19 +1,27 @@
-import { FormEvent } from "react";
-import { useForm } from "react-hook-form";
-import { ClientSchema } from "../../schemas/invoiceClientShema";
+import { FieldValues, useForm } from "react-hook-form";
 import { createResource } from "../../hooks/useCreateResource";
 import { toggleCustomerRegModal } from "../../slices/customerRegSlice";
 import { AppDispatch } from "../../store";
 import { useDispatch } from "react-redux";
+import {
+  ClientRegType,
+  clientRegschema,
+} from "../../schemas/invoiceClientShema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function RegisterCustomer() {
-  const { register, getValues } = useForm<ClientSchema>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ClientRegType>({
+    resolver: zodResolver(clientRegschema),
+  });
   const { postRequest } = createResource();
   const dispatch: AppDispatch = useDispatch();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    postRequest("/register_client", getValues());
+  const onSubmit = (data: FieldValues) => {
+    postRequest("/register_client", data);
     dispatch(toggleCustomerRegModal());
   };
 
@@ -23,7 +31,7 @@ export default function RegisterCustomer() {
         <h6>REGISTER NEW CLIENT</h6>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
               Name
@@ -34,6 +42,9 @@ export default function RegisterCustomer() {
               id="name"
               className="form-control"
             />
+            {errors.name && (
+              <p className="text-danger">{errors.name.message}</p>
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="phone" className="form-label">
@@ -45,6 +56,9 @@ export default function RegisterCustomer() {
               type="number"
               className="form-control"
             />
+            {errors.phone && (
+              <p className="text-danger">{errors.phone.message}</p>
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
@@ -56,6 +70,9 @@ export default function RegisterCustomer() {
               type="text"
               className="form-control"
             />
+            {errors.email && (
+              <p className="text-danger">{errors.email.message}</p>
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="address" className="form-label">
@@ -67,6 +84,9 @@ export default function RegisterCustomer() {
               type="text"
               className="form-control"
             />
+            {errors.address && (
+              <p className="text-danger">{errors.address.message}</p>
+            )}
           </div>
           <div className="mb-3 d-grid">
             <button className="btn btn-danger" type="submit">

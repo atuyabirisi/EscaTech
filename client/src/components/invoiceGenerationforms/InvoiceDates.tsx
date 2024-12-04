@@ -1,22 +1,34 @@
-import { useForm } from "react-hook-form";
-import { FormEvent } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AppDispatch } from "../../store";
 import { useDispatch } from "react-redux";
 import { setStepNumber } from "../../slices/invoiceFormSteps";
 import { setInvoiceFormData } from "../../slices/invoice/invoiceFormData";
+import {
+  InvoiceDateSchema,
+  InvoiceDate,
+} from "../../schemas/invoiceFormSchemas/invoiceDatesSchema";
 
 export default function InvoiceDates() {
-  const { register, getValues } = useForm(),
-    dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    dispatch(setInvoiceFormData(getValues()));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InvoiceDate>({
+    resolver: zodResolver(InvoiceDateSchema),
+  });
+
+  const onSubmit = (data: FieldValues) => {
+    data.opendate = data.opendate.toString();
+    data.duedate = data.duedate.toString();
+    dispatch(setInvoiceFormData(data));
     dispatch(setStepNumber(2));
   };
 
   return (
-    <form className="p-2" onSubmit={handleSubmit}>
+    <form className="p-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="card">
         <div className="card-header border-bottom-0 p-2">
           <h6>
@@ -35,9 +47,12 @@ export default function InvoiceDates() {
                 className="form-control"
               >
                 <option value=""></option>
-                <option value="closed">closed</option>
+                <option value="paid">paid</option>
                 <option value="open">open</option>
               </select>
+              {errors.status && (
+                <p className="text-danger">{errors.status.message}</p>
+              )}
             </div>
           </div>
           <div className="mb-3 row">
@@ -49,6 +64,9 @@ export default function InvoiceDates() {
                 id="opendate"
                 className="form-control"
               />
+              {errors.opendate && (
+                <p className="text-danger">{errors.opendate.message}</p>
+              )}
             </div>
             <div className="col-lg-6">
               <label htmlFor="duedate">Due Date:</label>
@@ -58,6 +76,9 @@ export default function InvoiceDates() {
                 id="duedate"
                 className="form-control"
               />
+              {errors.duedate && (
+                <p className="text-danger">{errors.duedate.message}</p>
+              )}
             </div>
           </div>
         </div>

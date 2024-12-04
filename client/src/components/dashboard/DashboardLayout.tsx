@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import GeneratedInvoicesTable from "../manageInvoices/GeneratedInvoicesTable";
 import InvoiceSubFormsParent from "../invoiceGenerationforms/InvoiceSubFormsParent";
+import MenuHumbuger from "../sidepanel/MenuHumbuger";
 
 export default function DashBoardLayout() {
   const { currentScreen } = useSelector(
@@ -14,11 +15,12 @@ export default function DashBoardLayout() {
   return (
     <>
       <NavParent />
-      <div className="row">
-        <div className="col-3">
+      <MenuHumbuger />
+      <div className="row mx-1">
+        <div className="d-none d-lg-flex col-lg-3">
           <SidePanel />
         </div>
-        <div className="col-8 pt-3">
+        <div className="col-lg-9 py-3">
           {currentScreen === 1 && (
             <>
               <DashAnalytics />
