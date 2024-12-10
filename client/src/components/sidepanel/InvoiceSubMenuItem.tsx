@@ -9,7 +9,7 @@ export default function InvoiceSubmenuItem() {
 
   return (
     <ul style={{ listStyle: "none" }}>
-      <li className="mb-2">
+      <li className="py-2">
         <a
           href="#"
           className="d-flex align-items-center gap-2 link-dark text-decoration-none"

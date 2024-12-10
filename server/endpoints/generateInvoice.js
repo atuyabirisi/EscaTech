@@ -43,7 +43,7 @@ router.get(
     const allInvoices = await GenerateInvoiceModel.find({})
       .populate("client")
       .sort({ createdAt: -1 });
-    res.status(200).send(allInvoices);
+    res.send(allInvoices);
   })
 );
 
@@ -52,7 +52,6 @@ router.get(
   asyncMiddleware(async (req, res) => {
     const { id } = req.params;
     const invoice = await GenerateInvoiceModel.findById(id).populate("client");
-    console.log(invoice);
     res.send(invoice);
   })
 );

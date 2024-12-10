@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 import { dateFormatter } from "../../utilities/dateFormatter";
 
-type Client = {
+export type Client = {
   _id: string;
   name: string;
   phone: number;
@@ -15,14 +15,14 @@ type Client = {
   address: string;
 };
 
-type InvoiceItem = {
+export type InvoiceItem = {
   description: string;
   quantity: number;
-  unitprice: number;
+  unitPrice: number;
   amount: number;
 };
 
-type FormData = {
+export type FormData = {
   _id: string;
   invoice_id: string;
   status: string;
@@ -33,6 +33,7 @@ type FormData = {
   vat: number;
   total: number;
   grandTotal: number;
+  createdAt: string;
 };
 
 export default function GeneratedInvoicesTable() {

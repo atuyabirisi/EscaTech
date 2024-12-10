@@ -3,4 +3,15 @@
     font-family: 'Courier New', Courier, monospace;
     max-width: 100%;
     max-height: 100%;
+    box-sizing: border-box;
+} 
+.pdfcolor
+ {
+    background: linear-gradient(135deg, rgb(231, 15, 141) 50%, rgb(80, 3, 204) 50%);
+    color: wheat;
+}
+.backdrop-color
+{
+    background: rgb(0, 0, 0);
+    opacity: 10;
 }
