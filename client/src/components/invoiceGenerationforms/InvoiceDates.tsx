@@ -47,7 +47,7 @@ export default function InvoiceDates() {
                 className="form-control"
               >
                 <option value=""></option>
-                <option value="paid">paid</option>
+                <option value="closed">Closed</option>
                 <option value="open">open</option>
               </select>
               {errors.status && (

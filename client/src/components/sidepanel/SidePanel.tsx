@@ -7,13 +7,17 @@ import {
 import InvoiceSubmenuItem from "./InvoiceSubMenuItem";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { toggleSidePanelInvoiceItem } from "../../slices/sidepanelSlices/invoiceMenuItemSlice";
 import { setHeroScreenState } from "../../slices/heroSectionScreen";
+import CustomerSubMenu from "./CustomerSubMenu";
+import {
+  toggleCutomerSubMenu,
+  toggleInvoiceSubMenu,
+} from "../../slices/sidepanelSlices/toggleSubMenus";
 
 export default function SidePanel() {
   const dispatch: AppDispatch = useDispatch();
-  const { toggleInvoiceMenuItem } = useSelector(
-    (state: RootState) => state.toggleSidepanelSubmenu
+  const { invoiceSubMenuState, customerSubMenuState } = useSelector(
+    (state: RootState) => state.toggleSidepanelSubmenus
   );
 
   return (
@@ -34,21 +38,23 @@ export default function SidePanel() {
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"
-              onClick={() => dispatch(toggleSidePanelInvoiceItem(1))}
+              onClick={() => dispatch(toggleInvoiceSubMenu())}
             >
               <FcDocument />
               <small>Invoices</small>
             </a>
-            {toggleInvoiceMenuItem && <InvoiceSubmenuItem />}
+            {invoiceSubMenuState && <InvoiceSubmenuItem />}
           </li>
           <li className="p-2">
             <a
               href="#"
               className="d-flex align-items-center gap-2 text-decoration-none text-dark"
+              onClick={() => dispatch(toggleCutomerSubMenu())}
             >
               <FcConferenceCall />
-              <small>Manage clients</small>
+              <small>customers</small>
             </a>
+            {customerSubMenuState && <CustomerSubMenu />}
           </li>
           <li className="p-2">
             <a

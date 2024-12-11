@@ -7,6 +7,8 @@ import { RootState } from "../../store";
 import GeneratedInvoicesTable from "../manageInvoices/GeneratedInvoicesTable";
 import InvoiceSubFormsParent from "../invoiceGenerationforms/InvoiceSubFormsParent";
 import MenuHumbuger from "../sidepanel/MenuHumbuger";
+import ManageCustomers from "../customers/ManageCustomers";
+import RegisterCustomer from "../customers/RegisterCustomer";
 
 export default function DashBoardLayout() {
   const { currentScreen } = useSelector(
@@ -31,6 +33,8 @@ export default function DashBoardLayout() {
           )}
           {currentScreen === 2 && <InvoiceSubFormsParent />}
           {currentScreen === 3 && <GeneratedInvoicesTable />}
+          {currentScreen === 4 && <RegisterCustomer />}
+          {currentScreen === 5 && <ManageCustomers />}
         </div>
       </div>
     </>

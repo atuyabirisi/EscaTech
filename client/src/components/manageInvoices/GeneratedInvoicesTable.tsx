@@ -6,6 +6,10 @@ import {
 import { Link } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 import { dateFormatter } from "../../utilities/dateFormatter";
+import Paginate from "../pagination/Paginate";
+import { useFirstLastPaginationIndex } from "../pagination/useFirstLastPaginationIndex";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export type Client = {
   _id: string;
@@ -37,7 +41,17 @@ export type FormData = {
 };
 
 export default function GeneratedInvoicesTable() {
-  const { data } = useData<FormData>("/invoice");
+  const { data, dataCount } = useData<FormData>("/invoice");
+  const { postsPerPage, currentPage } = useSelector(
+    (store: RootState) => store.paginationState
+  );
+  const { firstIndex, lastIndex } = useFirstLastPaginationIndex(
+    postsPerPage,
+    currentPage
+  );
+
+  const paginatedInvoices = data.slice(firstIndex, lastIndex);
+
   return (
     <>
       <div className="card mb-4">
@@ -54,8 +68,8 @@ export default function GeneratedInvoicesTable() {
               </tr>
             </thead>
             <tbody>
-              {data.map((invoice, index) => (
-                <tr key={index}>
+              {paginatedInvoices.map((invoice) => (
+                <tr key={invoice._id}>
                   <td>{invoice.invoice_id}</td>
                   <td>{invoice.client.name}</td>
                   <td>
@@ -95,7 +109,9 @@ export default function GeneratedInvoicesTable() {
             </tbody>
           </table>
         </div>
-        <div className="card-footer"></div>
+        <div className="card-footer">
+          <Paginate noOfItems={dataCount} />
+        </div>
       </div>
     </>
   );
