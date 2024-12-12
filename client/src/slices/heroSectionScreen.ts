@@ -5,7 +5,7 @@ type HeroSectionScreenState = {
 }
 
 const initialState: HeroSectionScreenState = {
-        currentScreen: 1,
+    currentScreen: 1,
 }
 
 const heroScreenSlice = createSlice({
@@ -15,7 +15,7 @@ const heroScreenSlice = createSlice({
         setHeroScreenState: ((state, { payload }) => {
             state.currentScreen = payload;
         }),
-    }
+    },
 });
 
 export default heroScreenSlice.reducer

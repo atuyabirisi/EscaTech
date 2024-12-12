@@ -20,8 +20,8 @@ const screenSlice = createSlice({
         },
         goBackAfterSubmission: (state) => {
             state.stepNumber = initialState.stepNumber;
-        }
-    }
+        },
+    },
 });
 
 export default screenSlice.reducer

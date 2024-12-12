@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type Pagination = {
-    currentPage: number,
-    postsPerPage: number,
-    totalPosts: number
-}
+import { Pagination } from "../types/PaginationType";
 
 const initialState: Pagination = {
     currentPage: 1,

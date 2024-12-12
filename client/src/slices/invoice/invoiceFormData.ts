@@ -1,25 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-type InvoiceItem = {
-  description: string,
-  quantity: number,
-  unitprice: number,
-  amount: number,
-} 
-
-type FormData = {
-    status: string,
-    opendate: string,
-    duedate: string ,
-    client: string,
-    invoiceItems: InvoiceItem[],
-    vat: number,
-    total: number
-    grandTotal: number
-}
+import { InvoiceFormData } from '../../types/invoiceFormData';
 
 type InvoceFormData = {
-    formData: FormData
+    formData: InvoiceFormData, 
 }
 
 const initialState: InvoceFormData = {
@@ -27,6 +10,7 @@ const initialState: InvoceFormData = {
     status: '',
     opendate: '',
     duedate: '',
+    service: '',
     client: '',
     invoiceItems: [],
     vat: 3240,
@@ -47,11 +31,11 @@ const invoiceFormDataSlice = createSlice({
     },
     calculateTotalBeforeTaxes: (state) => {
       const { invoiceItems } = state.formData;
-      let total = 0;
+      let totalBeforeTaxes = 0;
       for (let index = 0; index < invoiceItems.length; index++) {
-        total += invoiceItems[index].amount;
+        totalBeforeTaxes += invoiceItems[index].subtotal;
       }  
-      state.formData.total = total
+      state.formData.total = totalBeforeTaxes
     },
     calculateGrandTotal: (state) => {
       const { total, vat } = state.formData;

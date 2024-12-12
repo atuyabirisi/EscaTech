@@ -1,14 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export type Item = {
-    description: string;
-    quantity: number;
-    unitPrice: number;
-    amount: number;
-};
+import { InvoiceItemsType } from "../../schemas/invoiceFormSchemas/invoiceItemsSchema";
 
 export type InvoiceItems = {
-    invoiceItemData: Item
+    invoiceItemData: InvoiceItemsType
 }
 
 const initialState: InvoiceItems = {
@@ -16,7 +10,7 @@ const initialState: InvoiceItems = {
         description: '',
         quantity: 0,
         unitPrice: 0,
-        amount: 0,
+        subtotal: 0,
     }
 }
 
@@ -26,7 +20,7 @@ const invoiceItemsCart = createSlice({
     reducers: {
         setInvoiceItemsData: (state, { payload }) => {
             state.invoiceItemData = { ...state.invoiceItemData, ...payload };
-            state.invoiceItemData.amount = (state.invoiceItemData.quantity * state.invoiceItemData.unitPrice);
+            state.invoiceItemData.subtotal = (state.invoiceItemData.quantity * state.invoiceItemData.unitPrice);
         },   
         resetInvoiceItemsForm: (state) => {
             state.invoiceItemData = initialState.invoiceItemData;

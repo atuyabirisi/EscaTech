@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import forgotPasswordDataReducer from "./slices/forgotPassSlice";
 import resetPasswordformReducer from "./slices/resetPassFormSlice";
-import toggleSubMenuReducer from "./slices/sidepanelSlices/toggleSubMenus";
-import invoiceFormStepsReducer from "./slices/invoiceFormSteps";
+import toggleSubMenuReducer from "./slices/invoice/toggleSubMenus";
+import invoiceFormStepsReducer from "./slices/invoice/invoiceFormSteps";
 import heroScreenReducer from "./slices/heroSectionScreen";
 import invoiceFormDataReducer from "./slices/invoice/invoiceFormData";
-import customerRegModal from "./slices/customerRegSlice";
+import customerRegModal from "./slices/toggleCustomerReg";
 import invoiceItemsReducer from "./slices/invoice/invoiceItemsSlice";
 import paginationReducer from "./slices/pagination";
 

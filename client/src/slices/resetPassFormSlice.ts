@@ -1,14 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-type FormData = {
-  email: string,
-  otp: string,
-  password: string,
-}
+import { TypeResetPassword } from "../types/resetPassword";
 
 type ResetPasswordData = {
-  formData: FormData
-}
+  formData: TypeResetPassword
+};
 
 const initialState: ResetPasswordData = {
    formData:  {
@@ -22,12 +17,11 @@ const resetPassWordSlice = createSlice({
    name: "resetPasswordSlice",
    initialState,
    reducers: {
-	setFormData: (state, action) => {
-	   state.formData = {...state.formData, ...action.payload}
-	}
+      setFormData: (state, action) => {
+         state.formData = { ...state.formData, ...action.payload }
+      },
    },
 });
-
 
 export default resetPassWordSlice.reducer
 export const { setFormData } = resetPassWordSlice.actions

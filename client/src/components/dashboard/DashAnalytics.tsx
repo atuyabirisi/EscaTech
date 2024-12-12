@@ -1,29 +1,27 @@
-// import useInvoices from "../../hooks/useInvoices";
-// import { InvoiceData } from "../../types/typeDefinitions";
+import { useDashBoardCalculations } from "../../hooks/useDashBoardCalculations";
+import { useData } from "../../hooks/useData";
+import { FormData } from "../manageInvoices/GeneratedInvoicesTable";
 
 export default function DashAnalytics() {
-  //   const { data } = useInvoices();
-  //   const totalOPenInvoices = openInvoices(data);
-  //   const dueMoneies = amountDue(data);
-  //   const salesMonies = sales(data);
+  const { data } = useData<FormData>("/invoice");
+
+  const { totalDueAmount, noOfOpenInvoices, totalSalesAmount } =
+    useDashBoardCalculations(data);
 
   return (
-    // <div className="rounded d-flex bg-danger">
     <div className="row d-flex justify-content-center align-items-center gap-2">
       <div className="col-md-3 bg-warning text-center rounded-top py-3">
-        <h3>{3000}</h3>
-        <h6>SALES AMOUNT</h6>
+        <h3 className="fw-bold">{totalSalesAmount}</h3>
+        <h6 className="fw-bold">SALES AMOUNT</h6>
       </div>
       <div className="col-md-3 bg-danger text-center rounded-bottom  py-3">
-        <h3>{2500}</h3>
-        <h6>OPEN INVOICES</h6>
+        <h3 className="fw-bold">{noOfOpenInvoices}</h3>
+        <h6 className="fw-bold">OPEN INVOICES</h6>
       </div>
       <div className="col-md-3 bg-primary text-center rounded-top  py-3">
-        <h3>{5400}</h3>
-        <h6>DUE AMOUNT</h6>
+        <h3 className="fw-bold">{totalDueAmount}</h3>
+        <h6 className="fw-bold">DUE AMOUNT</h6>
       </div>
     </div>
-    // <div className="row justify-content-center gap-1"></div>
-    // </div>
   );
 }

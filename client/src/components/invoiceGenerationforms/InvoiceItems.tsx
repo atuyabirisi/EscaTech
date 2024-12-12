@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent } from "react";
 import { FcAdvance, FcDownLeft } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { goBack } from "../../slices/invoiceFormSteps";
+import { goBack } from "../../slices/invoice/invoiceFormSteps";
 import { AppDispatch, RootState } from "../../store";
 import {
   setInvoiceItemsData,
   resetInvoiceItemsForm,
 } from "../../slices/invoice/invoiceItemsSlice";
-import { setStepNumber } from "../../slices/invoiceFormSteps";
+import { setStepNumber } from "../../slices/invoice/invoiceFormSteps";
 import { setInvoiceProdutsData } from "../../slices/invoice/invoiceFormData";
 
 export default function InvoiceItems() {

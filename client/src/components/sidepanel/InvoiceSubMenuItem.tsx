@@ -2,7 +2,7 @@ import { FcList, FcSettings } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { setHeroScreenState } from "../../slices/heroSectionScreen";
-import { setStepNumber } from "../../slices/invoiceFormSteps";
+import { setStepNumber } from "../../slices/invoice/invoiceFormSteps";
 
 export default function InvoiceSubmenuItem() {
   const dispatch: AppDispatch = useDispatch();

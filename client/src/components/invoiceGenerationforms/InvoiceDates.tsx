@@ -2,12 +2,12 @@ import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppDispatch } from "../../store";
 import { useDispatch } from "react-redux";
-import { setStepNumber } from "../../slices/invoiceFormSteps";
+import { setStepNumber } from "../../slices/invoice/invoiceFormSteps";
 import { setInvoiceFormData } from "../../slices/invoice/invoiceFormData";
 import {
-  InvoiceDateSchema,
-  InvoiceDate,
-} from "../../schemas/invoiceFormSchemas/invoiceDatesSchema";
+  invoiceDateSchema,
+  InvoiceDatesType,
+} from "../../schemas/invoiceFormSchemas/invoiceItemsSchema";
 
 export default function InvoiceDates() {
   const dispatch: AppDispatch = useDispatch();
@@ -16,8 +16,8 @@ export default function InvoiceDates() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InvoiceDate>({
-    resolver: zodResolver(InvoiceDateSchema),
+  } = useForm<InvoiceDatesType>({
+    resolver: zodResolver(invoiceDateSchema),
   });
 
   const onSubmit = (data: FieldValues) => {
@@ -52,6 +52,24 @@ export default function InvoiceDates() {
               </select>
               {errors.status && (
                 <p className="text-danger">{errors.status.message}</p>
+              )}
+            </div>
+            <div className="col-6">
+              <label htmlFor="service" className="form-label">
+                Service:
+              </label>
+              <select
+                {...register("service")}
+                id="service"
+                className="form-control"
+              >
+                <option value=""></option>
+                <option value="installation">Installation</option>
+                <option value="maintainance">Maintainance</option>
+                <option value="supplies">Supplies</option>
+              </select>
+              {errors.service && (
+                <p className="text-danger">{errors.service.message}</p>
               )}
             </div>
           </div>

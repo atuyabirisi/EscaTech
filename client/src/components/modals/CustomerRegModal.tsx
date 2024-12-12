@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { toggleCustomerRegModal } from "../../slices/customerRegSlice";
+import { toggleCustomerRegModal } from "../../slices/toggleCustomerReg";
 import RegisterCustomer from "../customers/RegisterCustomer";
 
 export default function ClientModal() {

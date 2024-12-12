@@ -2,7 +2,7 @@ import { FormEvent, useEffect } from "react";
 import { FcDownLeft, FcDownRight } from "react-icons/fc";
 import { AppDispatch, RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { goBack } from "../../slices/invoiceFormSteps";
+import { goBack } from "../../slices/invoice/invoiceFormSteps";
 import {
   calculateGrandTotal,
   calculateTotalBeforeTaxes,

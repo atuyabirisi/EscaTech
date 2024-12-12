@@ -2,17 +2,17 @@ import { FieldValues, useForm } from "react-hook-form";
 import { FcAdvance, FcDownLeft } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { goBack, setStepNumber } from "../../slices/invoiceFormSteps";
-import { toggleCustomerRegModal } from "../../slices/customerRegSlice";
+import { goBack, setStepNumber } from "../../slices/invoice/invoiceFormSteps";
+import { toggleCustomerRegModal } from "../../slices/toggleCustomerReg";
 import CustomerRegModal from "../modals/CustomerRegModal";
 import { useData } from "../../hooks/useData";
 import { setInvoiceFormData } from "../../slices/invoice/invoiceFormData";
-import {
-  Client,
-  clientSchema,
-  InvoiceClient,
-} from "../../schemas/invoiceFormSchemas/invoiceClientSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  InvoiceClient,
+  invoiceClientSchema,
+} from "../../schemas/invoiceFormSchemas/invoiceItemsSchema";
+import { Client } from "../../types/clientType";
 
 export default function InvoiceClientDetails() {
   const {
@@ -20,7 +20,7 @@ export default function InvoiceClientDetails() {
     handleSubmit,
     formState: { errors },
   } = useForm<InvoiceClient>({
-    resolver: zodResolver(clientSchema),
+    resolver: zodResolver(invoiceClientSchema),
   });
   const dispatch: AppDispatch = useDispatch();
 

@@ -21,9 +21,9 @@ export default function DashGraph() {
           labels: labels,
           datasets: [
             {
-              label: "Sales",
+              label: "Sales Trend",
               data: scores,
-              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              backgroundColor: "rgba(6, 150, 207)",
               borderColor: "",
               borderWidth: 0,
             },
@@ -46,7 +46,7 @@ export default function DashGraph() {
   return (
     <div>
       <div className="text-center">
-        <h6>PERFORMANCE TREND</h6>
+        <h5 className="fw-bold">PERFORMANCE TREND</h5>
       </div>
       <div
         className="d-flex flex-column align-items-center px-3"

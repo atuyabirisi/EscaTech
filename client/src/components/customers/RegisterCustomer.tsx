@@ -1,13 +1,13 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { createResource } from "../../hooks/useCreateResource";
-import { toggleCustomerRegModal } from "../../slices/customerRegSlice";
+import { toggleCustomerRegModal } from "../../slices/toggleCustomerReg";
 import { AppDispatch } from "../../store";
 import { useDispatch } from "react-redux";
-import {
-  ClientRegType,
-  clientRegschema,
-} from "../../schemas/invoiceClientShema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  clientRegschema,
+  ClientRegType,
+} from "../../schemas/invoiceFormSchemas/invoiceItemsSchema";
 
 export default function RegisterCustomer() {
   const {
@@ -17,6 +17,7 @@ export default function RegisterCustomer() {
   } = useForm<ClientRegType>({
     resolver: zodResolver(clientRegschema),
   });
+
   const { postRequest } = createResource();
   const dispatch: AppDispatch = useDispatch();
 

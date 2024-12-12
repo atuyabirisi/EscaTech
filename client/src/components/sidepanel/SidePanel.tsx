@@ -12,7 +12,7 @@ import CustomerSubMenu from "./CustomerSubMenu";
 import {
   toggleCutomerSubMenu,
   toggleInvoiceSubMenu,
-} from "../../slices/sidepanelSlices/toggleSubMenus";
+} from "../../slices/invoice/toggleSubMenus";
 
 export default function SidePanel() {
   const dispatch: AppDispatch = useDispatch();
