@@ -5,7 +5,7 @@ import InvoiceClientDetails from "./InvoClientDetailsForm";
 import InvoiceItems from "./InvoiceItems";
 import InvoiceTaxes from "./InvoiceTaxes";
 
-export default function InvoiceSubFormsParent() {
+export default function InvoiceSubFormsWrapper() {
   const { stepNumber } = useSelector(
     (state: RootState) => state.invoiceFormSteps
   );
@@ -13,9 +13,7 @@ export default function InvoiceSubFormsParent() {
   return (
     <div className="card border-0">
       <div className="card-header p-2">
-        <h6>
-          <b>Generate Invoice</b>
-        </h6>
+        <h6 className="text-primary fw-bold">GENERATE INVOICE</h6>
       </div>
       <div
         style={{

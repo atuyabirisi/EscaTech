@@ -1,14 +1,10 @@
 import { useParams } from "react-router-dom";
-import { FormData } from "../manageInvoices/GeneratedInvoicesTable";
 import { useEffect, useState } from "react";
 import apiClient from "../../utilities/apiClient";
-import { FcExpand } from "react-icons/fc";
-import { VscKebabVertical } from "react-icons/vsc";
-import { Dropdown } from "react-bootstrap";
-import PdfOptions from "./pdfOptions";
+import { InvoiceData } from "../../types/invoiceData";
 
 export default function InvoiceReceipt() {
-  const [data, setData] = useState<FormData>();
+  const [data, setData] = useState<InvoiceData>();
 
   const { id } = useParams();
 
@@ -29,10 +25,10 @@ export default function InvoiceReceipt() {
         <div className="card-header pdfcolor" />
         <div className="card-body">
           <div className="d-flex justify-content-end">
+            <div className="w-100 d-flex justify-content-center align-items-center">
+              <img src="\src\assets\paid.png" alt="paid_stamp" />
+            </div>
             <div className="pb-2">
-              <div className="d-flex justify-content-end fw-bold">
-                <PdfOptions />
-              </div>
               <div
                 className="d-flex w-100 justify-content-center"
                 style={{ width: "100px", height: "100px" }}

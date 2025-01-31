@@ -7,7 +7,10 @@ const express = require("express"),
   error = require("../middleware/error"),
   client = require("../endpoints/client"),
   invoice = require("../endpoints/generateInvoice"),
-  generatePdf = require("../endpoints/generatePdf");
+  clientInvoicesRecord = require("../endpoints/clientInvoices"),
+  payInvoice = require("../endpoints/payInvoice"),
+  htmlToPdf = require("../endpoints/htmlToPdf"),
+  path = require("path");
 
 module.exports = function (app) {
   app.use(cors());
@@ -18,7 +21,11 @@ module.exports = function (app) {
   app.use("/api/verify_otp", verifyOtp);
   app.use("/api/register_client", client);
   app.use("/api/invoice", invoice);
-  app.use("/api/generate-pdf", generatePdf);
+  app.use("/api/client", clientInvoicesRecord);
+  app.use("/api/pay_invoice", payInvoice);
+  app.use("/api/generate_invoice_pdf", htmlToPdf);
+
+  app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
   app.use(error);
 };

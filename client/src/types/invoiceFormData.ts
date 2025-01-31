@@ -11,3 +11,4 @@ export type InvoiceFormData = {
       total: number,
       grandTotal: number,
 }
+

@@ -25,7 +25,6 @@ export default function InvoiceTaxes() {
 
   const generateInvoice = (event: FormEvent) => {
     event.preventDefault();
-    console.log(formData);
     postRequest("/invoice", formData);
   };
 

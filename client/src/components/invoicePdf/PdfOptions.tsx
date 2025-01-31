@@ -1,7 +1,13 @@
 import { Dropdown } from "react-bootstrap";
 import { VscKebabVertical } from "react-icons/vsc";
+import DownloadPdf from "./DownloadPdf";
+import { ReactNode } from "react";
 
-export default function PdfOptions() {
+interface Props {
+  pdfJsxMarkup: ReactNode;
+}
+
+export default function PdfOptions({ pdfJsxMarkup }: Props) {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="dark" id="">
@@ -9,7 +15,9 @@ export default function PdfOptions() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Download</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">
+          <DownloadPdf pdfComponent={pdfJsxMarkup} />
+        </Dropdown.Item>
         <Dropdown.Item href="#/action-2">Print</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

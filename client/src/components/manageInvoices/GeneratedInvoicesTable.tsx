@@ -1,50 +1,26 @@
-import {
-  RiEdit2Fill,
-  RiShareForward2Fill,
-  RiDownloadCloud2Fill,
-} from "react-icons/ri";
+import { IoMdEye } from "react-icons/io";
+import { IoLockClosed } from "react-icons/io5";
+import { HiLockOpen } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 import { dateFormatter } from "../../utilities/dateFormatter";
 import Paginate from "../pagination/Paginate";
 import { useFirstLastPaginationIndex } from "../pagination/useFirstLastPaginationIndex";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-
-export type Client = {
-  _id: string;
-  name: string;
-  phone: number;
-  email: string;
-  address: string;
-};
-
-export type InvoiceItem = {
-  description: string;
-  quantity: number;
-  unitPrice: number;
-  amount: number;
-};
-
-export type FormData = {
-  _id: string;
-  invoice_id: string;
-  status: string;
-  opendate: string;
-  duedate: string;
-  client: Client;
-  invoiceItems: InvoiceItem[];
-  vat: number;
-  total: number;
-  grandTotal: number;
-  createdAt: string;
-};
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { toggleCloseInvoiceModal } from "../../slices/invoice/closeInvoiceSlice";
+import CloseInvoiceModal from "../modals/CloseInvoiceModal";
+import { InvoiceData } from "../../types/invoiceData";
 
 export default function GeneratedInvoicesTable() {
-  const { data, dataCount } = useData<FormData>("/invoice");
+  const { data, dataCount } = useData<InvoiceData>("/invoice");
+
   const { postsPerPage, currentPage } = useSelector(
     (store: RootState) => store.paginationState
   );
+
+  const dispatch: AppDispatch = useDispatch();
+
   const { firstIndex, lastIndex } = useFirstLastPaginationIndex(
     postsPerPage,
     currentPage
@@ -54,8 +30,15 @@ export default function GeneratedInvoicesTable() {
 
   return (
     <>
-      <div className="card mb-4">
-        <div className="card-body" style={{ overflowX: "scroll" }}>
+      <CloseInvoiceModal />
+      <div className="card border-0 mb-4">
+        <div className="card-header">
+          <h6 className="text-primary fw-bold">GENERATED INVOICES</h6>
+        </div>
+        <div
+          className="card-body rounded bg-light my-1"
+          style={{ overflowX: "scroll" }}
+        >
           <table className="table table-striped">
             <thead>
               <tr>
@@ -68,44 +51,56 @@ export default function GeneratedInvoicesTable() {
               </tr>
             </thead>
             <tbody>
-              {paginatedInvoices.map((invoice) => (
-                <tr key={invoice._id}>
-                  <td>{invoice.invoice_id}</td>
-                  <td>{invoice.client.name}</td>
-                  <td>
-                    <ul>
-                      {invoice.invoiceItems.map((item, index) => (
-                        <li key={index}>{item.description}</li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td>{dateFormatter(invoice.opendate)}</td>
-                  <td>{invoice.status}</td>
-                  <td>
-                    <div className="d-flex gap-2">
-                      <div>
-                        {" "}
-                        <Link
-                          to={`/invoice/${invoice._id}`}
-                          className="link-success"
-                        >
-                          <RiEdit2Fill />
-                        </Link>
-                      </div>
-                      <div>
-                        <Link to={"#"} className="link-success">
-                          <RiShareForward2Fill />
-                        </Link>
-                      </div>
-                      <div>
-                        <Link to={"#"} className="link-success">
-                          <RiDownloadCloud2Fill />
-                        </Link>
-                      </div>
-                    </div>
-                  </td>
+              {paginatedInvoices.length === 0 ? (
+                <tr>
+                  <td colSpan={6}>Ooops!...No invoices available</td>
                 </tr>
-              ))}
+              ) : (
+                paginatedInvoices.map((invoice) => (
+                  <tr key={invoice._id}>
+                    <td>{invoice.invoice_id}</td>
+                    <td>{invoice.client.name}</td>
+                    <td>
+                      <ul>
+                        {invoice.invoiceItems.map((item, index) => (
+                          <li key={index}>{item.description}</li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td>{dateFormatter(invoice.opendate)}</td>
+                    <td>{invoice.status}</td>
+                    <td>
+                      <div className="d-flex gap-2">
+                        <button className="btn btn-info">
+                          <Link
+                            to={`/invoice/${invoice._id}`}
+                            className="link-dark"
+                          >
+                            <IoMdEye />
+                          </Link>
+                        </button>
+                        <button
+                          className={
+                            invoice.status === "closed"
+                              ? "btn btn-primary disabled"
+                              : "btn btn-primary"
+                          }
+                          onClick={() => {
+                            dispatch(toggleCloseInvoiceModal());
+                            localStorage.setItem("invoiceId", invoice._id);
+                          }}
+                        >
+                          {invoice.status === "closed" ? (
+                            <IoLockClosed />
+                          ) : (
+                            <HiLockOpen />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

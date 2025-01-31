@@ -28,12 +28,10 @@ export default function InvoiceDates() {
   };
 
   return (
-    <form className="p-2" onSubmit={handleSubmit(onSubmit)}>
-      <div className="card">
-        <div className="card-header border-bottom-0 p-2">
-          <h6>
-            <b>Invoice Status & Dates</b>
-          </h6>
+    <form className="rounded" onSubmit={handleSubmit(onSubmit)}>
+      <div className="card border-0">
+        <div className="card-header rounded-0 border-bottom-0">
+          <h6 className="fw-bold text-primary">Invoice Status & Dates</h6>
         </div>
         <div className="card-body">
           <div className="mb-3 row">

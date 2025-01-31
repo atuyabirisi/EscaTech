@@ -5,9 +5,10 @@ import Paginate from "../pagination/Paginate";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useFirstLastPaginationIndex } from "../pagination/useFirstLastPaginationIndex";
+import { Link } from "react-router-dom";
 
 export default function ManageCustomers() {
-  const { data, noOfCustomers } = useCustomers();
+  const { customerData, noOfCustomers } = useCustomers();
 
   const { postsPerPage, currentPage } = useSelector(
     (store: RootState) => store.paginationState
@@ -18,15 +19,15 @@ export default function ManageCustomers() {
     currentPage
   );
 
-  const paginatedData = data.slice(firstIndex, lastIndex);
+  const paginatedData = customerData.slice(firstIndex, lastIndex);
 
   return (
     <>
-      <div className="card">
+      <div className="card border-0">
         <div className="card-header">
-          <h6>REGISTERED CLIENTS</h6>
+          <h6 className="text-primary fw-bold">REGISTERED CLIENTS</h6>
         </div>
-        <div className="card-body table-responsive">
+        <div className="card-body table-responsive bg-light my-1">
           <table className="table table-striped text-nowrap">
             <thead>
               <tr>
@@ -47,9 +48,9 @@ export default function ManageCustomers() {
                   <td>
                     <div className="d-flex gap-2">
                       <div>
-                        <a href="#">
+                        <Link to={`/client/${client._id}`}>
                           <RiEdit2Fill />
-                        </a>
+                        </Link>
                       </div>
                       <div>
                         <a href="#">

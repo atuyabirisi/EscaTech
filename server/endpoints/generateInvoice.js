@@ -32,6 +32,7 @@ router.post(
       vat: vat,
       total: total,
       grandTotal: grandTotal,
+      outstandingBalance: grandTotal,
     });
 
     await newInvoice.save();
@@ -42,10 +43,21 @@ router.post(
 router.get(
   "/",
   asyncMiddleware(async (req, res) => {
-    const allInvoices = await GenerateInvoiceModel.find({})
-      .populate("client")
-      .sort({ createdAt: -1 });
-    res.send(allInvoices);
+    const { clientId } = req.query;
+
+    if (clientId) {
+      const clientInvoices = await GenerateInvoiceModel.find({
+        client: clientId,
+      })
+        .populate("client")
+        .sort({ createdAt: -1 });
+      res.send(clientInvoices);
+    } else {
+      const allInvoices = await GenerateInvoiceModel.find({})
+        .populate("client")
+        .sort({ createdAt: -1 });
+      res.send(allInvoices);
+    }
   })
 );
 

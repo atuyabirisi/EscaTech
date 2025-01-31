@@ -10,6 +10,10 @@
     background: linear-gradient(135deg, rgb(231, 15, 141) 50%, rgb(80, 3, 204) 50%);
     color: wheat;
 }
+.cardColors
+ {
+    background: linear-gradient(rgb(253, 93, 186) 50%, rgb(124, 58, 231) );
+}
 .backdrop-color
 {
     background: rgb(0, 0, 0);

@@ -1,22 +1,12 @@
 import { FcList, FcSettings } from "react-icons/fc";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { setHeroScreenState } from "../../slices/heroSectionScreen";
-import { setStepNumber } from "../../slices/invoice/invoiceFormSteps";
 
 export default function InvoiceSubmenuItem() {
-  const dispatch: AppDispatch = useDispatch();
-
   return (
     <ul style={{ listStyle: "none" }}>
       <li className="py-2">
         <a
-          href="#"
-          className="d-flex align-items-center gap-2 link-dark text-decoration-none"
-          onClick={() => {
-            dispatch(setHeroScreenState(2));
-            dispatch(setStepNumber(1));
-          }}
+          href="/invoice_generation"
+          className="d-flex align-items-center gap-2 text-decoration-none"
         >
           <FcSettings />
           <small>Generate invoice</small>
@@ -24,9 +14,8 @@ export default function InvoiceSubmenuItem() {
       </li>
       <li>
         <a
-          href="#"
-          className="d-flex align-items-center gap-2 link-dark text-decoration-none"
-          onClick={() => dispatch(setHeroScreenState(3))}
+          href="/invoices"
+          className="d-flex align-items-center gap-2 text-decoration-none"
         >
           <FcList />
           <small>Manage invoices</small>

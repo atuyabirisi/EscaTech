@@ -27,11 +27,11 @@ export default function RegisterCustomer() {
   };
 
   return (
-    <div className="p-1 h-100">
-      <div className="text-center mb-3 py-3">
-        <h6>REGISTER NEW CLIENT</h6>
+    <div className="p-1 h-100 card border-0">
+      <div className="mb-3 py-3 text-primary card-header">
+        <h6 className="fw-bold">REGISTER NEW CLIENT</h6>
       </div>
-      <div>
+      <div className="card-body bg-light rounded">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">

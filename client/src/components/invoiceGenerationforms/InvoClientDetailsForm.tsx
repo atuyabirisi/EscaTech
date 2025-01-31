@@ -37,10 +37,8 @@ export default function InvoiceClientDetails() {
     <div>
       <CustomerRegModal />
       <div className="card mb-3 border-0">
-        <div className="card-header border-bottom-0 rounded-0 p-2">
-          <h6>
-            <b>Client Details</b>
-          </h6>
+        <div className="card-header border-bottom-0 p-2">
+          <h6 className="fw-bold text-primary">Client Details</h6>
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>

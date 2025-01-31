@@ -37,7 +37,7 @@ export default function InvoiceItems() {
     <form onSubmit={addItemToInvoice}>
       <div className="card border-0 mb-3">
         <div className="card-header border-bottom-0 p-2">
-          <h6>
+          <h6 className="fw-bold text-primary">
             <b>Add Product/Service to Invoice</b>
           </h6>
         </div>
@@ -86,7 +86,7 @@ export default function InvoiceItems() {
                 id="subtotal"
                 type="number"
                 className="form-control"
-                value={invoiceItemData.amount}
+                value={invoiceItemData.subtotal}
                 onChange={handleInputFieldChange}
               />
             </div>

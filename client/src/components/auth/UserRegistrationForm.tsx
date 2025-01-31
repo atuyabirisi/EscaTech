@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { createResource } from "../../hooks/useCreateResource";
 
 export default function UserRegistrationForm() {
-  const [visible, setVisible] = useState(true);
+  const [_visible, setVisible] = useState(true);
   const { postRequest, error } = createResource();
 
   useEffect(() => {
@@ -28,12 +28,7 @@ export default function UserRegistrationForm() {
   };
 
   return (
-    <div style={{ overflowX: "hidden" }} className="vh-100 p-1">
-      {visible && (
-        <div className="alert alert-success" role="alert">
-          {error}
-        </div>
-      )}
+    <div className="p-1 bg-light rounded">
       <form autoComplete="false" onSubmit={handleSubmit}>
         <div className="row my-2">
           <div className="col-lg-4">
@@ -82,7 +77,7 @@ export default function UserRegistrationForm() {
           </div>
         </div>
         <div className="col-lg-8 d-flex justify-content-end">
-          <button className="btn btn-info" type="submit">
+          <button className="btn btn-danger" type="submit">
             <small>Register User</small>
           </button>
         </div>

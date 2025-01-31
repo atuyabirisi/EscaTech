@@ -24,7 +24,7 @@ const dateSchema = z
 export const invoiceDateSchema =  z.object({
     status: z.enum(["closed", "open"], { message: "Invoice status required"}),
     opendate: dateSchema.refine(dateValue => dateValue <= new Date(), { message: "Invalid invoice open date"}),
-    duedate: dateSchema.refine(dateValue => dateValue >= new Date(), { message: `Invalid due date`}),
+    duedate: dateSchema.refine(dateValue => dateValue > new Date(), { message: `Invalid due date`}),
     service: z.enum(["installation", "maintainance", "supplies"], { message: "Service info is required"}),
 });
 
@@ -43,8 +43,23 @@ export const clientRegschema = z.object({
 });
 
 
+/*###--PAYMENT FORM SCHEMA--### */
+
+ export const invoicePaymentSchema= z.object({
+  invoice_id: z.string().min(1, { message: "Inovoice_id is required" }),
+  amount_due: z.number().min(1, { message: "Invalid amount due" }),
+  payed_amount: z.number().min(1, { message: "Invalid payed amount" }),
+  payment_date: dateSchema.refine(dateValue => dateValue > new Date(), { message: "Invalid payment date"}),
+  payment_method: z.enum(["bank, mpesa"], { message: "Payment method is required"}),
+  bank: z.string().optional(),
+  transaction_reference: z.string().min(1, { message: "transaction reference is required"})
+});
+
+
+
 
 export type ClientRegType = z.infer<typeof clientRegschema>
 export type InvoiceItemsType = z.infer<typeof invoiceItemsSchema>
 export type InvoiceDatesType = z.infer<typeof invoiceDateSchema>
 export type InvoiceClient = z.infer<typeof invoiceClientSchema>
+export type InvoicePaymentFormType = z.infer<typeof invoicePaymentSchema>

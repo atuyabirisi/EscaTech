@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { LoginCredentials, useLogin } from "../../hooks/useLogin";
 import { useForm } from "react-hook-form";
 import { AppDispatch } from "../../store";
@@ -6,17 +6,22 @@ import { useDispatch } from "react-redux";
 import { openForgotPassModal } from "../../slices/forgotPassSlice";
 
 export default function Login() {
-  const [showPass, setShowPass] = useState(false);
-  const { register, getValues } = useForm<LoginCredentials>();
   const { login, error } = useLogin();
 
   const dispatch: AppDispatch = useDispatch();
-  const openForgotPasswordModal = () => {
-    dispatch(openForgotPassModal());
+
+  const [showPass, setShowPass] = useState(false);
+
+  const { register, getValues, reset } = useForm<LoginCredentials>();
+
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    login(getValues());
+    reset();
   };
 
-  const handleFormSubmit = () => {
-    login(getValues());
+  const openForgotPasswordModal = () => {
+    dispatch(openForgotPassModal());
   };
 
   return (
@@ -30,8 +35,8 @@ export default function Login() {
           />
         </div>
         <div className="text-center">
-          <h5>ESCATECH SERVICES K LTD</h5>
-          <h5>Login</h5>
+          <h5 className="fw-bolder">ESCATECH SERVICES K LTD</h5>
+          <h5 className="fw-bold">Login</h5>
         </div>
       </div>
       <div className="d-flex justify-content-center text-danger p-2 rounded">
@@ -85,7 +90,7 @@ export default function Login() {
         </div>
       </div>
       <div className="text-center">
-        <small>powered by atuya</small>
+        <small className="fw-bold">powered by atuya</small>
       </div>
     </div>
   );

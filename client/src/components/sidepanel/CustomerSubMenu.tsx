@@ -1,20 +1,12 @@
 import { FcList, FcSettings } from "react-icons/fc";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { setHeroScreenState } from "../../slices/heroSectionScreen";
 
 export default function CustomerSubMenu() {
-  const dispatch: AppDispatch = useDispatch();
-
   return (
     <ul style={{ listStyle: "none" }}>
       <li className="py-2">
         <a
-          href="#"
-          className="d-flex align-items-center gap-2 link-dark text-decoration-none"
-          onClick={() => {
-            dispatch(setHeroScreenState(4));
-          }}
+          href="/register-customer"
+          className="d-flex align-items-center gap-2 text-decoration-none"
         >
           <FcSettings />
           <small>Register customer</small>
@@ -22,9 +14,8 @@ export default function CustomerSubMenu() {
       </li>
       <li>
         <a
-          href="#"
-          className="d-flex align-items-center gap-2 link-dark text-decoration-none"
-          onClick={() => dispatch(setHeroScreenState(5))}
+          href="/manage-customers"
+          className="d-flex align-items-center gap-2 text-decoration-none"
         >
           <FcList />
           <small>Manage customers</small>

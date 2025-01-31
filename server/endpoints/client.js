@@ -31,6 +31,15 @@ router.get(
   })
 );
 
+router.get(
+  "/:id",
+  asyncMiddleware(async (req, res) => {
+    const { id } = req.params;
+    const clientInfo = await Client.findById(id);
+    res.send(clientInfo);
+  })
+);
+
 router.put(
   "/:id",
   asyncMiddleware(async (req, res) => {

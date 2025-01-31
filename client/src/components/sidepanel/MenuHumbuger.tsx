@@ -2,7 +2,7 @@ import { BsXLg, BsTextRight } from "react-icons/bs";
 
 export default function MenuHumbuger() {
   return (
-    <div className="d-flex justify-content-between p-4 fs-4 bg-light">
+    <div className="d-flex justify-content-between p-4 fs-4 bg-light mx-1">
       <div className="fs-6">
         <BsXLg />
       </div>
