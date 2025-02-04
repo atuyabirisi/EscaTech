@@ -7,7 +7,6 @@ import {
 import InvoiceSubmenuItem from "./InvoiceSubMenuItem";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { setHeroScreenState } from "../../slices/heroSectionScreen";
 import CustomerSubMenu from "./CustomerSubMenu";
 import {
   toggleCutomerSubMenu,

@@ -18,13 +18,19 @@ router.post(
 
     const page = await browser.newPage();
 
-    await page.setContent("<h1>Test PDF</h1><p>This should be in the PDF</p>", {
-      waitUntil: "domcontentloaded",
+    await page.setContent(htmlContent, {
+      waitUntil: "networkidle0",
     });
 
-    const pdfBuffer = await page.pdf({ format: "A4" });
+    const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
 
     await browser.close();
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="generated-pdf.pdf"'
+    );
 
     res.send(pdfBuffer);
   })
