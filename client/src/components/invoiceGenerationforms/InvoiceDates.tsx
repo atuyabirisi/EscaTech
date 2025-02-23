@@ -8,6 +8,7 @@ import {
   invoiceDateSchema,
   InvoiceDatesType,
 } from "../../schemas/invoiceFormSchemas/invoiceItemsSchema";
+import { formattedDate } from "../../utilities/formatDate";
 
 export default function InvoiceDates() {
   const dispatch: AppDispatch = useDispatch();
@@ -21,8 +22,8 @@ export default function InvoiceDates() {
   });
 
   const onSubmit = (data: FieldValues) => {
-    data.opendate = data.opendate.toString();
-    data.duedate = data.duedate.toString();
+    data.opendate = formattedDate(data.opendate);
+    data.duedate = formattedDate(data.duedate);
     dispatch(setInvoiceFormData(data));
     dispatch(setStepNumber(2));
   };

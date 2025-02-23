@@ -1,10 +1,10 @@
 import { RiDownloadCloud2Fill, RiShareForward2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { dateFormatter } from "../../../utilities/dateFormatter";
-import { FormData } from "../../manageInvoices/GeneratedInvoicesTable";
+import { InvoiceData } from "../../../types/invoiceData";
 
 interface Props {
-  invoiceData: FormData[];
+  invoiceData: InvoiceData[];
 }
 
 export default function CustomerInvoicesInfo({ invoiceData }: Props) {

@@ -1,21 +1,14 @@
 import { ChangeEvent, FormEvent } from "react";
-import { FcAdvance, FcDownLeft } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { goBack } from "../../slices/invoice/invoiceFormSteps";
 import { AppDispatch, RootState } from "../../store";
 import {
   setInvoiceItemsData,
   resetInvoiceItemsForm,
 } from "../../slices/invoice/invoiceItemsSlice";
-import { setStepNumber } from "../../slices/invoice/invoiceFormSteps";
 import { setInvoiceProdutsData } from "../../slices/invoice/invoiceFormData";
 
 export default function InvoiceItems() {
   const dispatch: AppDispatch = useDispatch();
-
-  const goOneStepBack = () => dispatch(goBack());
-
-  const advance = () => dispatch(setStepNumber(4));
 
   const { invoiceItemData } = useSelector(
     (state: RootState) => state.invoiceItemsData
@@ -35,10 +28,10 @@ export default function InvoiceItems() {
 
   return (
     <form onSubmit={addItemToInvoice}>
-      <div className="card border-0 mb-3">
+      <div className="card border-0 mb-1">
         <div className="card-header border-bottom-0 p-2">
           <h6 className="fw-bold text-primary">
-            <b>Add Product/Service to Invoice</b>
+            <b>ADD PRODUCT/SERVICE TO INVOICE</b>
           </h6>
         </div>
         <div className="card-body">
@@ -93,24 +86,10 @@ export default function InvoiceItems() {
             <div className="col-md-6 d-flex py-3 justify-content-end align-items-end">
               <label htmlFor="#"></label>
               <button className="btn btn-info" type="submit">
-                Add product/service to Invoice
+                Add service to Invoice
               </button>
             </div>
           </div>
-        </div>
-        <div className="card-footer d-flex justify-content-end gap-3">
-          <button className="btn btn-danger" onClick={goOneStepBack}>
-            <span className="px-2">
-              <FcDownLeft />
-            </span>
-            Go Back
-          </button>
-          <button className="btn btn-danger" onClick={advance}>
-            Next
-            <span className="px-2">
-              <FcAdvance />
-            </span>
-          </button>
         </div>
       </div>
     </form>

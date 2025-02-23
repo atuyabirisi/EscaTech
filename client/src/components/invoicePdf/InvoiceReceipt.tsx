@@ -25,8 +25,10 @@ export default function InvoiceReceipt() {
         <div className="card-header pdfcolor" />
         <div className="card-body">
           <div className="d-flex justify-content-end">
-            <div className="w-100 d-flex justify-content-center align-items-center">
-              <img src="\src\assets\paid.png" alt="paid_stamp" />
+            <div className="w-100 d-flex justify-content-between align-items-center">
+              <div>
+                <img src="\src\assets\paid.png" alt="paid_stamp" />
+              </div>
             </div>
             <div className="pb-2">
               <div
@@ -43,7 +45,7 @@ export default function InvoiceReceipt() {
                   }}
                 />
               </div>
-              <h3>
+              <h3 className="text-center">
                 <b>Escatech Services Ltd</b>
               </h3>
               <h6>P.O.BOX 58851-00200, Nairobi</h6>
@@ -103,7 +105,7 @@ export default function InvoiceReceipt() {
                     <td>{product.description}</td>
                     <td>{product.quantity}</td>
                     <td>{product.unitPrice}</td>
-                    <td>{product.amount}</td>
+                    <td>{product.subtotal}</td>
                   </tr>
                 ))}
                 <tr className="border">
@@ -169,7 +171,7 @@ export default function InvoiceReceipt() {
               Dealers in installation, repair and maintenance of lifts and
               escalators, electrical services
             </b>
-          </small>{" "}
+          </small>
           <br />
           <small>
             <b>Invoice Generated on: {Date.now()}</b>

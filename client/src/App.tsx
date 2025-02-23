@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginLayout from "./components/auth/LoginLayout";
-import InvoiceReceipt from "./components/invoicePdf/InvoiceReceipt";
+// import InvoiceReceipt from "./components/invoicePdf/InvoiceReceipt";
 import UserAccountsWrapper from "./components/userAccounts/UserAccountsWrapper";
 import ManageCustomersPage from "./pages/ManageCustomersPage";
 import DashBoardAnalyticsPage from "./pages/DashBoardPage";

@@ -1,44 +1,53 @@
-import apiClient from "../../utilities/apiClient";
+// import axios from "axios";
 
-export default function DownloadPdf() {
-  const generatePdf = async () => {
-    // const htmlString = ReactDOMServer.renderToStaticMarkup(<PDFContent />);
+// export default function DownloadPdf() {
+// const handleGeneratePdf = async () => {
+//   axios
+//     .post("http://localhost:8000/api/generate-pdf", {
+//       htmlContent: "hhh",
+//     })
+//     .then((res) => {
+//       const filePathArray = res.data.split("/");
+//       const invoiceId = filePathArray.slice(-1);
+//       window.open(`http://localhost:8000/invoice_pdf/${invoiceId}`);
+//     })
+//     .catch((err) => console.log(err));
+// try {
+//   const response = await fetch("http://localhost:8000/api/generate-pdf", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       htmlContent: "<h1>Hello, World!</h1>",
+//     }),
+//   });
 
-    await apiClient
-      .post(
-        "/generate_invoice_pdf",
-        { htmlContent: "This is a sample PDF" },
-        { responseType: "blob" }
-      )
-      .then((res) => {
-        console.log(res);
+//   console.log(typeof response);
+// if (!response.ok) {
+//   throw new Error("Failed to generate PDF");
+// }
 
-        // const blob = new Blob([res.data], { type: "application/pdf" });
+// const blob = await response.blob();
+// const url = window.URL.createObjectURL(blob);
 
-        const url = window.URL.createObjectURL(new Blob([res.data]));
-
-        const link = document.createElement("a");
-
-        link.href = url;
-
-        link.setAttribute("download", "generated-pdf.pdf");
-
-        // link.download = "generated-pdf";
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.remove();
-      })
-      .catch((error) => console.log("Error generating PDF:", error));
-  };
-
-  return (
-    <div>
-      <button onClick={generatePdf} className="btn btn-primary">
-        Download PDF
-      </button>
-    </div>
-  );
-}
+// Create a link and trigger the download
+// const a = document.createElement("a");
+// a.href = url;
+// a.download = "generated-pdf.pdf";
+// document.body.appendChild(a);
+// a.click();
+// document.body.removeChild(a);
+//   } catch (error) {
+//     console.error("Error:", error);
+//     alert("Failed to generate PDF");
+//   }
+// };
+//   return (
+//     <div>
+//       <button onClick={handleGeneratePdf} className="btn btn-primary">
+//         Download PDF
+//       </button>
+//     </div>
+//   );
+// }

@@ -19,8 +19,7 @@ async function generateInvoiceId() {
   } else {
     suffixNo = 1;
   }
-
-  return `${prefix}/${invoiceYearPrefix}/${suffixNo}`;
+  return `${prefix}-${invoiceYearPrefix}-${suffixNo}`;
 }
 
 module.exports = generateInvoiceId;

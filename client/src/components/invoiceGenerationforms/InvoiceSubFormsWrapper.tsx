@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import InvoiceDates from "./InvoiceDates";
 import InvoiceClientDetails from "./InvoClientDetailsForm";
-import InvoiceItems from "./InvoiceItems";
 import InvoiceTaxes from "./InvoiceTaxes";
+import InvoiceItemsWrapper from "./InvoiceItemsWrapper";
 
 export default function InvoiceSubFormsWrapper() {
   const { stepNumber } = useSelector(
@@ -25,7 +25,7 @@ export default function InvoiceSubFormsWrapper() {
       >
         {stepNumber <= 1 && <InvoiceDates />}
         {stepNumber === 2 && <InvoiceClientDetails />}
-        {stepNumber === 3 && <InvoiceItems />}
+        {stepNumber === 3 && <InvoiceItemsWrapper />}
         {stepNumber === 4 && <InvoiceTaxes />}
       </div>
     </div>

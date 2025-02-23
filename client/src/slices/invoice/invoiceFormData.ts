@@ -29,6 +29,11 @@ const invoiceFormDataSlice = createSlice({
     setInvoiceProdutsData: (state, { payload }) => {
       state.formData.invoiceItems.push(payload)
     },
+    removeInvoiceProduct: (state, { payload }) => {
+        const updatedinvoiceItems = state.formData.invoiceItems.filter(n => n != state.formData.invoiceItems[payload]);
+        state.formData.invoiceItems = updatedinvoiceItems;
+        
+    },
     calculateTotalBeforeTaxes: (state) => {
       const { invoiceItems } = state.formData;
       let totalBeforeTaxes = 0;
@@ -47,5 +52,13 @@ const invoiceFormDataSlice = createSlice({
   },
 });
 
-export const { setInvoiceFormData, setInvoiceProdutsData,calculateTotalBeforeTaxes, calculateGrandTotal, resetForm } = invoiceFormDataSlice.actions;
+export const { 
+          setInvoiceFormData, 
+          setInvoiceProdutsData,
+          calculateTotalBeforeTaxes, 
+          calculateGrandTotal, 
+          resetForm,
+          removeInvoiceProduct 
+        } = invoiceFormDataSlice.actions;
+
 export default invoiceFormDataSlice.reducer;

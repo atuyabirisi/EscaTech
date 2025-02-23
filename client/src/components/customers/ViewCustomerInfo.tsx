@@ -7,17 +7,17 @@ import {
 } from "react-icons/ri";
 import { FcFactory } from "react-icons/fc";
 import { useData } from "../../hooks/useData";
-import { FormData } from "../manageInvoices/GeneratedInvoicesTable";
 import { dateFormatter } from "../../utilities/dateFormatter";
 import { useDataObject } from "../../hooks/useDataObjects";
 import { Client } from "../../types/clientType";
+import { InvoiceData } from "../../types/invoiceData";
 
 export default function ViewCustomerInfo() {
   const { id } = useParams();
 
   const { singleRecord } = useDataObject<Client>(`/register_client/${id}`);
 
-  const { data } = useData<FormData>(`/client/${id}`);
+  const { data } = useData<InvoiceData>(`/client/${id}`);
 
   return (
     <>

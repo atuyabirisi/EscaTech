@@ -4,6 +4,7 @@ const asyncMiddleware = require("../middleware/asyncMiddleware");
 const PayInvoiceModel = require("../models/transactionModel");
 const GenerateInvoiceModel = require("../models/generateInvoiceModel");
 const CreditBalanceModel = require("../models/creditBalanceModel");
+const Client = require("../models/clientModel");
 
 router.post(
   "/",
@@ -36,6 +37,12 @@ router.post(
 
     if (!invoiceRecord) throw new Error("Invoice not found!!");
 
+    const clientRecord = await Client.findById(invoiceRecord.client._id);
+    if (!clientRecord)
+      throw new Error(
+        `Unable to find client linked to invoice ${invoiceRecord.invoice_id}`
+      );
+
     const balance = payed_amount - invoiceRecord.outstandingBalance;
 
     if (balance === 0) {
@@ -47,8 +54,6 @@ router.post(
       invoiceRecord.outstandingBalance = -balance;
     }
 
-    let creditBalance;
-
     if (balance > 0) {
       invoiceRecord.status = "closed";
 
@@ -56,17 +61,30 @@ router.post(
 
       invoiceRecord.creditBalance = balance;
 
-      creditBalance = new CreditBalanceModel({
+      clientRecord.credit += balance;
+
+      const creditBalance = new CreditBalanceModel({
         credit_amount: balance,
         overpaidInvoiceId: invoice_id,
         transaction_reference: transaction_reference,
         client: invoiceRecord.client._id,
       });
+
+      await creditBalance.save();
     }
 
-    await creditBalance.save();
+    await clientRecord.save();
 
     await invoiceRecord.save();
+    res
+      .status(201)
+      .send(
+        `Invoice ${
+          invoiceRecord.invoice_id
+        } has been successfully closed. Credit balance${
+          balance > 0 ? balance : "0"
+        }`
+      );
   })
 );
 

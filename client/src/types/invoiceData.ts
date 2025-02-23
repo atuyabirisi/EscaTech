@@ -4,7 +4,7 @@ export type InvoiceItem = {
     description: string;
     quantity: number;
     unitPrice: number;
-    amount: number;
+    subtotal: number;
   };
 
 export type InvoiceData = {

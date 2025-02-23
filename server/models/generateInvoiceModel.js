@@ -13,8 +13,8 @@ const GenerateInvoiceModel = model(
     {
       invoice_id: { type: String, required: true },
       status: { type: String, required: true, enum: ["open", "closed"] },
-      opendate: { type: Date, required: true },
-      duedate: { type: Date, required: true },
+      opendate: { type: String, required: true },
+      duedate: { type: String, required: true },
       service: {
         type: String,
         required: true,
@@ -31,6 +31,7 @@ const GenerateInvoiceModel = model(
       grandTotal: { type: Number, required: true },
       outstandingBalance: { type: Number, required: true },
       creditBalance: { type: Number, default: 0, required: true },
+      pdfLink: { type: String, default: "#" },
     },
     {
       timestamps: true,
